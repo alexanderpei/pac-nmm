@@ -1,6 +1,8 @@
 function dx = fn_dde(t, x, Z, Ac, Ac_, Ad, P)
 
-% fprintf('%0.3f\n', t)
+r = interp1(linspace(0, P.dur, size(P.rand, 2)), P.rand',   t, 'nearest');
+
+fprintf('%0.6f\n', t)
 
 % Calculate pc depolarization
 x(P.ns)          = x(15) - x(16);
@@ -11,8 +13,8 @@ Z(P.ns + P.ns*2) = Z(15 + P.ns*2) - Z(16  + P.ns*2);
 
 % Calculate input 
 K = zeros(size(x));
-K(1:14)            = P.G'.*P.k'.*P.p'.*ones(size(P.p'));
-K([1:14] + P.ns*2) = P.G'.*P.k'.*P.p'.*ones(size(P.p'));
+K(1:14)            = P.G'.*P.k'.*P.p'.*r(1:14)';
+K([1:14] + P.ns*2) = P.G'.*P.k'.*P.p'.*r(15:28)';
 
 % Calculate tACS input
 I = zeros(size(x));
