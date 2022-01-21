@@ -5,7 +5,7 @@ close all
 
 [Ac, Ac_, Ad, P] = fn_get_A();
 
-nTrial = 1;
+nTrial = 10;
 
 for iTrial = 1:nTrial
 
